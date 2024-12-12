@@ -15,6 +15,23 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+export const loginUser = async (req, res) => {
+  try {
+    const user = await UserModel.findOne({
+      username: req.body.username,
+      password: req.body.password,
+    });
+
+    if (user) {
+      res.status(200).json({ data: user });
+    } else {
+      res.status(404).json({ msg: "No Users Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
 export const getUserById = async (req, res) => {
   try {
     const id = req.params.id;
