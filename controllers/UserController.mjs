@@ -1,4 +1,5 @@
 import UserModel from "../models/UserModel.mjs";
+import { capitalize } from "../utils.mjs";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -18,6 +19,21 @@ export const getUserById = async (req, res) => {
   try {
     const id = req.params.id;
     const user = await UserModel.findById(id).populate("team");
+
+    if (user) {
+      res.status(200).json({ data: user });
+    } else {
+      res.status(404).json({ msg: "No User Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+export const getUserByRole = async (req, res) => {
+  try {
+    const role = capitalize(req.params.slug);
+    const user = await UserModel.find({ role });
 
     if (user) {
       res.status(200).json({ data: user });

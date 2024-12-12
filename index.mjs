@@ -6,6 +6,7 @@ import { PORT, MONGO_URI } from "./config.mjs";
 
 import UserRoutes from "./routes/UserRoutes.mjs";
 import AssetRoutes from "./routes/AssetRoutes.mjs";
+import TeamRoutes from "./routes/TeamRoutes.mjs";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(cors());
 
 app.use("/user", UserRoutes);
 app.use("/asset", AssetRoutes);
+app.use("/team", TeamRoutes);
 
 app.listen(PORT, (err) => {
   if (err) console.error(err);

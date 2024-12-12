@@ -5,6 +5,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
   team: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Team",
@@ -14,12 +22,6 @@ const userSchema = new mongoose.Schema({
     enum: ["User", "Admin", "Manager"],
     default: "User",
   },
-  assets: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Asset",
-    },
-  ],
 });
 
 const UserModel = mongoose.model("User", userSchema, "users");

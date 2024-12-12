@@ -2,7 +2,7 @@ import TeamModel from "../models/TeamModel.mjs";
 
 export const getAllTeams = async (req, res) => {
   try {
-    const teams = await TeamModel.find().populate("team");
+    const teams = await TeamModel.find().populate("manager");
 
     if (teams) {
       res.status(200).json({ data: teams });
@@ -17,7 +17,22 @@ export const getAllTeams = async (req, res) => {
 export const getTeamById = async (req, res) => {
   try {
     const id = req.params.id;
-    const team = await TeamModel.findById(id).populate("team");
+    const team = await TeamModel.findById(id).populate("manager");
+
+    if (team) {
+      res.status(200).json({ data: team });
+    } else {
+      res.status(404).json({ msg: "No Team Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+export const getTeamByManager = async (req, res) => {
+  try {
+    const manager = req.params.id;
+    const team = await TeamModel.find({ manager });
 
     if (team) {
       res.status(200).json({ data: team });

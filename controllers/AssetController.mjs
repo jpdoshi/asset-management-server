@@ -152,6 +152,48 @@ export const fixAssetById = async (req, res) => {
   }
 };
 
+export const repairAssetById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const asset = await AssetModel.findByIdAndUpdate(
+      id,
+      { status: "In Repair" },
+      {
+        new: true,
+      }
+    );
+
+    if (asset) {
+      res.status(200).json({ data: asset });
+    } else {
+      res.status(404).json({ msg: "No Assets Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+export const availableAssetById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const asset = await AssetModel.findByIdAndUpdate(
+      id,
+      { status: "Available" },
+      {
+        new: true,
+      }
+    );
+
+    if (asset) {
+      res.status(200).json({ data: asset });
+    } else {
+      res.status(404).json({ msg: "No Assets Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
 export const createAsset = async (req, res) => {
   try {
     const asset = await AssetModel.create(req.body);
