@@ -18,7 +18,7 @@ const AssetRoutes = express.Router();
 
 AssetRoutes.get("/", getAllAssets);
 AssetRoutes.get("/id/:id", getAssetById);
-AssetRoutes.get("/category", getAssetByCategory);
+AssetRoutes.get("/category/:category", getAssetByCategory);
 AssetRoutes.get("/recents", getRecentAssetHistory);
 AssetRoutes.get("/history/:id", getAssetHistoryById);
 AssetRoutes.put("/scrap/:id", scrapAssetById);

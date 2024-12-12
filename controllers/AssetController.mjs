@@ -80,7 +80,7 @@ export const deleteAssetById = async (req, res) => {
 
 export const getAssetByCategory = async (req, res) => {
   try {
-    const category = capitalize(req.query.c);
+    const category = capitalize(req.params.category);
     const asset = await AssetModel.find({ category });
 
     if (asset) {
