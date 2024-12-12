@@ -1,4 +1,5 @@
 import TeamModel from "../models/TeamModel.mjs";
+import UserModel from "../models/UserModel.mjs";
 
 export const getAllTeams = async (req, res) => {
   try {
@@ -18,9 +19,10 @@ export const getTeamById = async (req, res) => {
   try {
     const id = req.params.id;
     const team = await TeamModel.findById(id).populate("manager");
+    const users = await UserModel.find({ team: id });
 
     if (team) {
-      res.status(200).json({ data: team });
+      res.status(200).json({ data: { team, users } });
     } else {
       res.status(404).json({ msg: "No Team Found" });
     }

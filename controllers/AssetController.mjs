@@ -81,7 +81,7 @@ export const deleteAssetById = async (req, res) => {
 export const getAssetByCategory = async (req, res) => {
   try {
     const category = capitalize(req.params.category);
-    const asset = await AssetModel.find({ category });
+    const asset = await AssetModel.find({ category }).populate("user");
 
     if (asset) {
       res.status(200).json({ data: asset });
