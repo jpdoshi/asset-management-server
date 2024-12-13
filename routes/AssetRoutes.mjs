@@ -7,6 +7,8 @@ import {
   getAllAssets,
   getAssetByCategory,
   getAssetById,
+  getAssetByTeam,
+  getAssetByUser,
   getAssetHistoryById,
   getRecentAssetHistory,
   repairAssetById,
@@ -18,6 +20,8 @@ const AssetRoutes = express.Router();
 
 AssetRoutes.get("/", getAllAssets);
 AssetRoutes.get("/id/:id", getAssetById);
+AssetRoutes.get("/user/:id", getAssetByUser);
+AssetRoutes.get("/team/:id", getAssetByTeam);
 AssetRoutes.get("/category/:category", getAssetByCategory);
 AssetRoutes.get("/recents", getRecentAssetHistory);
 AssetRoutes.get("/history/:id", getAssetHistoryById);

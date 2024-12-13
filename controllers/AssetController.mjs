@@ -93,6 +93,36 @@ export const getAssetByCategory = async (req, res) => {
   }
 };
 
+export const getAssetByTeam = async (req, res) => {
+  try {
+    const team = req.params.id;
+    const assets = await AssetModel.find({ team }).populate("user");
+
+    if (assets) {
+      res.status(200).json({ data: assets });
+    } else {
+      res.status(404).json({ msg: "No Assets Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+export const getAssetByUser = async (req, res) => {
+  try {
+    const user = req.params.id;
+    const assets = await AssetModel.find({ user });
+
+    if (assets) {
+      res.status(200).json({ data: assets });
+    } else {
+      res.status(404).json({ msg: "No Assets Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
 export const updateAssetById = async (req, res) => {
   try {
     const id = req.params.id;
