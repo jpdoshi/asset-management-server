@@ -9,6 +9,18 @@ const teamSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  requests: [
+    {
+      asset: {
+        type: String,
+        enum: ["Monitor", "Mouse", "Keyboard", "Laptop"],
+      },
+      requestedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    },
+  ],
 });
 
 const TeamModel = mongoose.model("Team", teamSchema, "teams");

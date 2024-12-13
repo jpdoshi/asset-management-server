@@ -50,6 +50,7 @@ export const getRecentAssetHistory = async (req, res) => {
     const assets = await AssetModel.find({
       "maintenanceLog.date": { $exists: true },
     })
+      .populate("user")
       .sort("-maintenanceLog.date")
       .limit(10);
 

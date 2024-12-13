@@ -23,6 +23,14 @@ const userSchema = new mongoose.Schema({
     default: "User",
   },
   designation: String,
+  requests: [
+    {
+      asset: {
+        type: String,
+        enum: ["Monitor", "Mouse", "Keyboard", "Laptop"],
+      },
+    },
+  ],
 });
 
 const UserModel = mongoose.model("User", userSchema, "users");
