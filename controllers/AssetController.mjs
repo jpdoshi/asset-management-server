@@ -1,4 +1,6 @@
 import AssetModel from "../models/AssetModel.mjs";
+import TeamModel from "../models/TeamModel.mjs";
+import UserModel from "../models/UserModel.mjs";
 import { capitalize } from "../utils.mjs";
 
 export const getAllAssets = async (req, res) => {
@@ -40,6 +42,22 @@ export const getAssetHistoryById = async (req, res) => {
     } else {
       res.status(404).json({ msg: "No Assets Found" });
     }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+export const getRequestedAssets = async (req, res) => {
+  try {
+    const userAssets = await UserModel.find({
+      "requests.0": { $exists: true },
+    });
+    const teamAssets = await TeamModel.find({
+      "requests.0": { $exists: true },
+    });
+    const assets = { userAssets, teamAssets };
+
+    res.status(200).json({ data: assets });
   } catch (err) {
     res.status(500).send(err);
   }

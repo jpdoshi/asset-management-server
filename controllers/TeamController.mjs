@@ -15,6 +15,29 @@ export const getAllTeams = async (req, res) => {
   }
 };
 
+export const requestAsset = async (req, res) => {
+  try {
+    const team = await TeamModel.findById(req.params.id);
+    let requests = team.requests;
+
+    const asset = req.body.asset;
+    const user = req.body.userId;
+
+    requests.push({ asset, requestedBy: user });
+
+    if (team) {
+      await TeamModel.findByIdAndUpdate(team._id, {
+        requests,
+      });
+      res.status(200).json({ data: team });
+    } else {
+      res.status(400).json({ msg: "User not Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
 export const getTeamById = async (req, res) => {
   try {
     const id = req.params.id;

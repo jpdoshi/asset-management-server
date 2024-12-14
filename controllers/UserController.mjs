@@ -108,6 +108,26 @@ export const createUser = async (req, res) => {
   }
 };
 
+export const requestAsset = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.id);
+    let requests = user.requests;
+
+    requests.push(req.body.asset);
+
+    if (user) {
+      await UserModel.findByIdAndUpdate(user._id, {
+        requests,
+      });
+      res.status(200).json({ data: user });
+    } else {
+      res.status(400).json({ msg: "User not Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
 export const removeUserFromTeam = async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.id);

@@ -8,6 +8,7 @@ import {
   getUserByRole,
   loginUser,
   removeUserFromTeam,
+  requestAsset,
   updateUserById,
 } from "../controllers/UserController.mjs";
 
@@ -17,6 +18,7 @@ UserRoutes.get("/", getAllUsers);
 UserRoutes.get("/:id", getUserById);
 UserRoutes.get("/role/:slug", getUserByRole);
 UserRoutes.post("/", createUser);
+UserRoutes.post("/request-asset/:id", requestAsset);
 UserRoutes.post("/login", loginUser);
 UserRoutes.delete("/:id", deleteUserById);
 UserRoutes.delete("/remove-team/:id", removeUserFromTeam);

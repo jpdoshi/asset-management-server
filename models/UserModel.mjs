@@ -25,10 +25,8 @@ const userSchema = new mongoose.Schema({
   designation: String,
   requests: [
     {
-      asset: {
-        type: String,
-        enum: ["Monitor", "Mouse", "Keyboard", "Laptop"],
-      },
+      type: String,
+      enum: ["Monitor", "Mouse", "Keyboard", "Laptop"],
     },
   ],
 });

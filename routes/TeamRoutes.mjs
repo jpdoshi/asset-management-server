@@ -6,6 +6,7 @@ import {
   getAllTeams,
   getTeamById,
   getTeamByManager,
+  requestAsset,
   updateTeamById,
 } from "../controllers/TeamController.mjs";
 
@@ -15,6 +16,7 @@ TeamRoutes.get("/", getAllTeams);
 TeamRoutes.get("/:id", getTeamById);
 TeamRoutes.get("/manager/:id", getTeamByManager);
 TeamRoutes.post("/", createTeam);
+TeamRoutes.post("/request-asset/:id", requestAsset);
 TeamRoutes.delete("/:id", deleteTeamById);
 TeamRoutes.put("/:id", updateTeamById);
 
