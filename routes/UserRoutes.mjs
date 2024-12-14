@@ -7,6 +7,7 @@ import {
   getUserById,
   getUserByRole,
   loginUser,
+  removeAssetRequest,
   removeUserFromTeam,
   requestAsset,
   updateUserById,
@@ -23,5 +24,6 @@ UserRoutes.post("/login", loginUser);
 UserRoutes.delete("/:id", deleteUserById);
 UserRoutes.delete("/remove-team/:id", removeUserFromTeam);
 UserRoutes.put("/:id", updateUserById);
+UserRoutes.put("/remove-request/:id", removeAssetRequest);
 
 export default UserRoutes;

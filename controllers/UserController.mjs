@@ -1,5 +1,5 @@
 import UserModel from "../models/UserModel.mjs";
-import { capitalize } from "../utils.mjs";
+import { capitalize, removeFirstStringElement } from "../utils.mjs";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -119,6 +119,30 @@ export const requestAsset = async (req, res) => {
       await UserModel.findByIdAndUpdate(user._id, {
         requests,
       });
+      res.status(200).json({ data: user });
+    } else {
+      res.status(400).json({ msg: "User not Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+export const removeAssetRequest = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const asset = req.body.asset;
+
+    let user = await UserModel.findById(userId);
+
+    if (user) {
+      const requests = removeFirstStringElement(user.requests, asset);
+      user = await UserModel.findByIdAndUpdate(
+        user._id,
+        { requests },
+        { new: true }
+      );
+
       res.status(200).json({ data: user });
     } else {
       res.status(400).json({ msg: "User not Found" });

@@ -38,6 +38,31 @@ export const requestAsset = async (req, res) => {
   }
 };
 
+export const removeAssetRequest = async (req, res) => {
+  try {
+    const teamId = req.params.id;
+    const asset = req.body.asset;
+
+    let team = await TeamModel.findById(teamId);
+    const index = team.requests.filter((obj) => obj["asset"] !== asset);
+
+    if (team) {
+      const requests = index;
+      team = await TeamModel.findByIdAndUpdate(
+        team._id,
+        { requests },
+        { new: true }
+      );
+
+      res.status(200).json({ data: team });
+    } else {
+      res.status(400).json({ msg: "User not Found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
 export const getTeamById = async (req, res) => {
   try {
     const id = req.params.id;
